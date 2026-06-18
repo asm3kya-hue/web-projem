@@ -22,7 +22,30 @@
     
     <!-- Unsplash Tech Image -->
     <img src="https://unsplash.com" alt="Debian Workspace" class="site-resmi">
+<!-- DİNAMİK ARAÇLAR PANELİ -->
+<div class="dinamik-araç-paneli">
+    <!-- Hava Durumu Kartı -->
+    <div class="araç-kartı">
+        <h3 data-key="weather_title">Weather</h3>
+        <div class="araç-icerik">
+            <input type="text" id="cityInput" placeholder="City..." data-key-placeholder="city_placeholder">
+            <button id="getWeather" class="mini-buton">Get</button>
+            <div id="weatherResult" class="sonuc-yazisi">--°C</div>
+        </div>
+    </div>
 
+    <!-- Döviz Hesaplayıcı Kartı -->
+    <div class="araç-kartı">
+        <h3 data-key="calc_title">Currency</h3>
+        <div class="araç-icerik">
+            <input type="number" id="amount" value="1">
+            <select id="fromCurrency" class="secici"></select>
+            <span class="ok">➔</span>
+            <select id="toCurrency" class="secici"></select>
+            <div id="resultText" class="sonuc-yazisi">0.00</div>
+        </div>
+    </div>
+</div>
     <!-- Information Button -->
     <button class="giriş-butonu">Learn More</button>
 
@@ -65,6 +88,10 @@
     </div>
 
     <script src="script.js"></script>
+    <!-- Diğer içerikler bittiği yer -->
+    <script src="script.js"></script>
+</body>
+</html>
 
 </body>
 </html>

@@ -139,3 +139,45 @@ body.dark-mode .kart, body.dark-mode .form-alani {
 body.dark-mode p {
     color: #bdc3c7;
 }
+.dinamik-araç-paneli {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1000px;
+    margin: 30px auto;
+    flex-wrap: wrap; /* Mobilde alt alta geçer */
+}
+
+.araç-kartı {
+    background: white;
+    flex: 1;
+    min-width: 320px;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    border-top: 5px solid #3498db;
+    transition: transform 0.3s ease;
+}
+
+.araç-kartı:hover { transform: translateY(-5px); }
+
+.araç-icerik input, .araç-icerik select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin: 5px;
+}
+
+.sonuc-yazisi {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #2c3e50;
+    margin-top: 15px;
+}
+
+/* Karanlık Mod Desteği */
+body.dark-mode .araç-kartı {
+    background: #2c2c38;
+    color: white;
+}
+body.dark-mode .sonuc-yazisi { color: #f1c40f; }
