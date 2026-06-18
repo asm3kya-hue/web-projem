@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Site on Debian</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <!-- Navigation Menu -->
+    <nav class="ana-menü">
+        <a href="index.html" class="aktif">Home</a> | 
+        <a href="hakkimda.html">About Me</a>
+    </nav>
+
+    <!-- Dark Mode Toggle Button -->
+    <button id="temaButonu" class="tema-degistirici">🌙 Dark Mode</button>
+
+    <h1>Hello Debian World!</h1>
+    <p>I started from scratch and created my very first web page using only the terminal.</p>
+    
+    <!-- Unsplash Tech Image -->
+    <img src="https://unsplash.com" alt="Debian Workspace" class="site-resmi">
+
+    <!-- Information Button -->
+    <button class="giriş-butonu">Learn More</button>
+
+    <!-- Cards Container -->
+    <div class="kart-kapsayici">
+        
+        <!-- Card 1 -->
+        <div class="kart">
+            <h3>Fast Learning</h3>
+            <p>Master terminal commands and core web technologies step by step on Debian Linux.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="kart">
+            <h3>Live Deployment</h3>
+            <p>Deploy your code instantly to the world using Git and GitHub Pages integration.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="kart">
+            <h3>Dynamic Code</h3>
+            <p>Capture form data and build interactive websites using vanilla JavaScript.</p>
+        </div>
+
+    </div>
+
+    <!-- Newsletter Subscription Form -->
+    <div class="form-alani">
+        <h2>Subscribe to Our Newsletter</h2>
+        <form id="aboneFormu">
+            <!-- Name Input -->
+            <input type="text" id="kullaniciAdi" placeholder="Your Name" required>
+            
+            <!-- Email Input -->
+            <input type="email" id="kullaniciEposta" placeholder="Your Email Address" required>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="form-butonu">Subscribe</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
