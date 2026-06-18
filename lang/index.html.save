@@ -1,0 +1,16 @@
+<!-- HTML içindeki metinleri bu şekilde işaretle -->
+<h1 data-key="welcome">Hello Debian World!</h1>
+<p data-key="desc">Started from scratch and coding.</p>
+
+<!-- Dil Seçici (Dropdown) Menüsü -->
+<select id="languageSelector">
+  <option value="en">English</option>
+  <option value="tr">Türkçe</option>
+  <option value="de">Deutsch</option>
+  <option value="es">Español</option>
+  <option value="zh">中文</option>
+  <option value="fr">Français</option>
+  <option value="ar">العربية</option>
+  <option value="hi">हिन्दी</option>
+  <option value="ru">Русский</option>
+</select>
