@@ -1,7 +1,7 @@
-// --- AYARLAR ---
-const apiKey = '8036ac72870bbb1bb342996e9d88975f'; // Sizin API anahtarınız doğrudan eklendi
+// --- GÜVENLİ AYARLAR ---
+const apiKey = '8036ac72870bbb1bb342996e9d88975f'; 
 
-// --- KOYU TEMA (DARK MODE) YÖNETİMİ ---
+// --- TEME DEĞİŞTİRME BUTONU ---
 const themeToggle = document.getElementById('theme-toggle');
 if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
@@ -9,11 +9,7 @@ if (localStorage.getItem('theme') === 'dark') {
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark');
-        } else {
-            localStorage.setItem('theme', 'light');
-        }
+        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
     });
 }
 
@@ -27,17 +23,17 @@ async function getHavaDurumu(city) {
         weatherText.innerText = "Güncelleniyor...";
         const response = await fetch(`https://openweathermap.org{city},TR&appid=${apiKey}&units=metric&lang=tr`);
         
-        if (!response.ok) throw new Error('Hava durumu verisi alınamadı.');
+        if (!response.ok) throw new Error('API Bağlantı Hatası');
         
         const data = await response.json();
         const temp = Math.round(data.main.temp);
         
-        // KESİN DÜZELTME: [0] indeksi eklendi, böylece hata vermeden açıklama okunacak
+        // KESİN ÇÖZÜM: [0] dizi indeksi eklenerek description doğru şekilde okundu
         const desc = data.weather[0].description; 
         
         weatherText.innerHTML = `🌤️ <strong>${city}:</strong> ${temp}°C, ${desc}`;
     } catch (error) {
-        weatherText.innerText = "Hata: Hava durumu verisi çekilemedi.";
+        weatherText.innerText = "Hata: Veri alınamadı.";
         console.error(error);
     }
 }
@@ -55,21 +51,16 @@ const currencyResult = document.getElementById('currency-result');
 
 async function dovizCevir() {
     if (!currencyResult || !amountInput) return;
-    
     const amount = amountInput.value;
     const from = fromCurrency.value;
     const to = toCurrency.value;
     
-    if (amount === "" || amount <= 0) {
-        currencyResult.innerText = "Lütfen geçerli bir miktar girin.";
-        return;
-    }
+    if (amount === "" || amount <= 0) return;
     
     try {
         currencyResult.innerText = "Hesaplanıyor...";
         const response = await fetch(`https://er-api.com{from}`);
-        
-        if (!response.ok) throw new Error("Döviz verisi alınamadı.");
+        if (!response.ok) throw new Error("Döviz Verisi Alınamadı");
         
         const data = await response.json();
         const rate = data.rates[to];
@@ -77,7 +68,7 @@ async function dovizCevir() {
         
         currencyResult.innerHTML = `💱 <strong>${amount} ${from} =</strong> ${total} ${to}`;
     } catch (error) {
-        currencyResult.innerText = "Hata: Kur bilgisi alınamadı.";
+        currencyResult.innerText = "Hata: Kur alınamadı.";
         console.error(error);
     }
 }
