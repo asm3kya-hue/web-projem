@@ -120,10 +120,27 @@
         </div>
     </div>
 
-    <!-- Döviz Hesaplayıcı Kartı -->
-    <div class="araç-kartı">
-        <h3 data-key="calc_title">Currency</h3>
-        <div class="araç-icerik">
+  <div class="doviz-cevirici">
+    <h3>Döviz Çevirici</h3>
+    <div class="currency-inputs">
+        <input type="number" id="currency-amount" value="1" min="1">
+        
+        <select id="from-currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+        </select>
+        
+        <span>➔</span>
+        
+        <select id="to-currency">
+            <option value="TRY" selected>TRY</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+        </select>
+    </div>
+    <p id="currency-result">Hesaplanıyor...</p>
+</div>
             <input type="number" id="amount" value="1">
             <select id="fromCurrency" class="secici"></select>
             <span class="ok">➔</span>

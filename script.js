@@ -164,3 +164,41 @@ citySelect.addEventListener('change', (e) => {
 
 // Sayfa ilk yüklendiğinde varsayılan şehir (Bursa) için çalıştır
 getHavaDurumu(citySelect.value);
+// --- Döviz Çevirici Kodları ---
+const amountInput = document.getElementById('currency-amount');
+const fromCurrency = document.getElementById('from-currency');
+const toCurrency = document.getElementById('to-currency');
+const currencyResult = document.getElementById('currency-result');
+
+async function dovizCevir() {
+    const amount = amountInput.value;
+    const from = fromCurrency.value;
+    const to = toCurrency.value;
+
+    if (amount === "" || amount <= 0) return;
+
+    try {
+        currencyResult.innerText = "Hesaplanıyor...";
+        // Ücretsiz ve anahtarsız döviz API'si
+        const response = await fetch(`https://er-api.com{from}`);
+        
+        if (!response.ok) throw new Error("Döviz verisi alınamadı.");
+        
+        const data = await response.json();
+        const rate = data.rates[to];
+        const total = (amount * rate).toFixed(2); // Virgülden sonra 2 basamak
+
+        currencyResult.innerHTML = `<strong>${amount} ${from} =</strong> ${total} ${to}`;
+    } catch (error) {
+        currencyResult.innerText = "Hata: Kur bilgisi alınamadı.";
+        console.error(error);
+    }
+}
+
+// Girdiler veya seçimler değiştikçe hesapla
+amountInput.addEventListener('input', dovizCevir);
+fromCurrency.addEventListener('change', dovizCevir);
+toCurrency.addEventListener('change', dovizCevir);
+
+// Sayfa açıldığında ilk hesaplamayı yap
+dovizCevir();
