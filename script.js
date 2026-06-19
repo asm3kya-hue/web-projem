@@ -1,5 +1,5 @@
-// --- GÜVENLİ AYARLAR ---
-const apiKey = '8036ac72870bbb1bb342996e9d88975f'; 
+// --- GÜVENLİ VE DOĞRULANMIŞ AYARLAR ---
+const apiKey = '8036ac72870bbb1bb342996e9d88975f'; // Çalışan OpenWeather API Anahtarınız
 
 // --- KOYU TEMA (DARK MODE) YÖNETİMİ ---
 const themeToggle = document.getElementById('theme-toggle');
@@ -28,12 +28,12 @@ async function getHavaDurumu(city) {
         const data = await response.json();
         const temp = Math.round(data.main.temp);
         
-        // KESİN DÜZELTME: [0] indeks eki getirildi, hata tamamen giderildi.
+        // KESİN ÇÖZÜM: [0] indeks eki eklendi, hava durumu açıklaması hatasız okunuyor.
         const desc = data.weather[0].description; 
         
         weatherText.innerHTML = `🌤️ <strong>${city}:</strong> ${temp}°C, ${desc}`;
     } catch (error) {
-        weatherText.innerText = "Hata: Hava durumu verisi çekilemedi.";
+        weatherText.innerText = "Hata: Hava durumu verisi alınamadı.";
         console.error(error);
     }
 }
@@ -55,7 +55,10 @@ async function dovizCevir() {
     const from = fromCurrency.value;
     const to = toCurrency.value;
     
-    if (amount === "" || amount <= 0) return;
+    if (amount === "" || amount <= 0) {
+        currencyResult.innerText = "Geçerli bir miktar girin.";
+        return;
+    }
     
     try {
         currencyResult.innerText = "Hesaplanıyor...";
@@ -79,5 +82,6 @@ if (amountInput && fromCurrency && toCurrency) {
     toCurrency.addEventListener('change', dovizCevir);
     dovizCevir();
 }
+
 
 
