@@ -110,3 +110,57 @@ window.onload = () => {
     // Para birimi listelerini doldurmak için bir fonksiyon eklenebilir
     changeLanguage('en'); 
 };
+const themeToggle = document.getElementById('theme-toggle'); // HTML'deki buton id'si
+
+// Sayfa yüklendiğinde eski seçimi kontrol et
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    // Seçimi hafızada tut
+    if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+});
+// OpenWeatherMap API anahtarınızı buraya tırnaklar içine yazın
+const apiKey = '5708914023875f549223f7b7d80b4ecf'; 
+
+const citySelect = document.getElementById('city-select');
+const weatherText = document.getElementById('weather-text');
+
+async function getHavaDurumu(city) {
+    try {
+        weatherText.innerText = "Güncelleniyor...";
+        
+        // API isteği gönderiyoruz
+        const response = await fetch(`https://openweathermap.org{city},TR&appid=${apiKey}&units=metric&lang=tr`);
+        
+        if (!response.ok) {
+            throw new Error('Hava durumu verisi alınamadı.');
+        }
+
+        const data = await response.json();
+        
+        // Dereceyi yuvarlayıp açıklamayı alıyoruz
+        const temp = Math.round(data.main.temp); 
+        const desc = data.weather[0].description; // İlk elemandaki açıklamayı alıyoruz
+        
+        // HTML alanına yazdırıyoruz
+        weatherText.innerHTML = `<strong>${city}:</strong> ${temp}°C, ${desc}`;
+    } catch (error) {
+        weatherText.innerText = "Hata: Veri çekilemedi. API anahtarınızı kontrol edin.";
+        console.error(error);
+    }
+}
+
+// Şehir listesinden seçim değiştikçe çalışacak fonksiyon
+citySelect.addEventListener('change', (e) => {
+    getHavaDurumu(e.target.value);
+});
+
+// Sayfa ilk yüklendiğinde varsayılan şehir (Bursa) için çalıştır
+getHavaDurumu(citySelect.value);
