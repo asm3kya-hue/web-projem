@@ -1,7 +1,7 @@
 // --- GÜVENLİ AYARLAR ---
 const apiKey = '8036ac72870bbb1bb342996e9d88975f'; 
 
-// --- TEME DEĞİŞTİRME BUTONU ---
+// --- KOYU TEMA (DARK MODE) YÖNETİMİ ---
 const themeToggle = document.getElementById('theme-toggle');
 if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
@@ -28,12 +28,12 @@ async function getHavaDurumu(city) {
         const data = await response.json();
         const temp = Math.round(data.main.temp);
         
-        // KESİN ÇÖZÜM: [0] dizi indeksi eklenerek description doğru şekilde okundu
+        // KESİN DÜZELTME: [0] indeks eki getirildi, hata tamamen giderildi.
         const desc = data.weather[0].description; 
         
         weatherText.innerHTML = `🌤️ <strong>${city}:</strong> ${temp}°C, ${desc}`;
     } catch (error) {
-        weatherText.innerText = "Hata: Veri alınamadı.";
+        weatherText.innerText = "Hata: Hava durumu verisi çekilemedi.";
         console.error(error);
     }
 }
