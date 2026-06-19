@@ -32,7 +32,7 @@ async function getHavaDurumu(city) {
         const data = await response.json();
         const temp = Math.round(data.main.temp);
         
-        // HATA DÜZELTİLDİ: [0] dizini eklenerek hava durumu açıklaması doğru şekilde çekildi
+        // KESİN DÜZELTME: [0] indeksi eklendi, böylece hata vermeden açıklama okunacak
         const desc = data.weather[0].description; 
         
         weatherText.innerHTML = `🌤️ <strong>${city}:</strong> ${temp}°C, ${desc}`;
@@ -72,8 +72,6 @@ async function dovizCevir() {
         if (!response.ok) throw new Error("Döviz verisi alınamadı.");
         
         const data = await response.json();
-        
-        // HATA DÜZELTİLDİ: rates[to] verisi güvenli bir şekilde alındı ve hesaplandı
         const rate = data.rates[to];
         const total = (amount * rate).toFixed(2);
         
@@ -90,4 +88,5 @@ if (amountInput && fromCurrency && toCurrency) {
     toCurrency.addEventListener('change', dovizCevir);
     dovizCevir();
 }
+
 
